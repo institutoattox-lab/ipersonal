@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iPersonal - Seu treino personalizado começa aqui</title>
+  <meta name="description" content="A inteligência artificial que encontra o personal certo pra você — em menos de 2 minutos, direto no WhatsApp.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #111;
+      background: #fff;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      transition: all 0.3s;
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo {
+      position: relative;
+      width: 48px;
+      height: 48px;
+    }
+
+    .logo-outer {
+      position: absolute;
+      inset: 0;
+      background: #000;
+      border-radius: 50%;
+    }
+
+    .logo-inner {
+      position: absolute;
+      inset: 4px;
+      background: linear-gradient(135deg, #3B82F6, #1E40AF);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .logo-border {
+      position: absolute;
+      inset: -4px;
+      border: 2px solid #000;
+      border-radius: 50%;
+    }
+
+    .brand-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .header-contact {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #6b7280;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .header-contact:hover {
+      color: #2563EB;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 8rem 0 5rem;
+      background: linear-gradient(180deg, #f9fafb 0%, #fff 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #DBEAFE;
+      color: #1E40AF;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 .highlight {
+      color: #2563EB;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: #6b7280;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #25D366;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.125rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+    }
+
+    .cta-primary:hover {
+      background: #22c55e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+    }
+
+    .cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, #2563EB, #1E40AF);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.125rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    }
+
+    .cta-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    }
+
+    .hero-info {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .hero-info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Mockup */
+    .mockup-wrapper {
+      transform: rotate(2deg);
+      transition: transform 0.3s;
+    }
+
+    .mockup-wrapper:hover {
+      transform: rotate(0deg);
+    }
+
+    .mockup {
+      background: linear-gradient(135deg, #3B82F6, #1E40AF);
+      padding: 4px;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .mockup-inner {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+    }
+
+    .mockup-header {
+      background: #2563EB;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .mockup-header .logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .mockup-header-info h3 {
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .mockup-header-info p {
+      color: #BFDBFE;
+      font-size: 0.75rem;
+    }
+
+    .mockup-chat {
+      padding: 1.5rem;
+      background: #f9fafb;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .chat-message {
+      background: white;
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+      max-width: 80%;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .chat-message.sent {
+      background: #2563EB;
+      color: white;
+      margin-left: auto;
+      border-radius: 1rem 1rem 0 1rem;
+    }
+
+    .chat-message.received {
+      border-radius: 1rem 1rem 1rem 0;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: #6b7280;
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    /* How It Works */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .step-card {
+      position: relative;
+      background: linear-gradient(135deg, #f9fafb, #fff);
+      border: 2px solid #e5e7eb;
+      border-radius: 1rem;
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+
+    .step-card:hover {
+      border-color: #2563EB;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .step-number {
+      position: absolute;
+      top: -1rem;
+      left: 2rem;
+      background: #2563EB;
+      color: white;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+    }
+
+    .step-icon {
+      font-size: 3rem;
+      margin: 1rem 0;
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-desc {
+      color: #6b7280;
+    }
+
+    /* Benefits Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .benefits-list {
+      list-style: none;
+    }
+
+    .benefit-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: start;
+    }
+
+    .benefit-icon {
+      background: #DBEAFE;
+      color: #2563EB;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .testimonial-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-header {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-avatar {
+      width: 3.5rem;
+      height: 3.5rem;
+      background: linear-gradient(135deg, #3B82F6, #1E40AF);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .stars {
+      color: #fbbf24;
+      margin-top: 0.25rem;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      color: #374151;
+      font-size: 1.125rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2563EB;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+
+    /* Notifications */
+    .notifications-box {
+      background: linear-gradient(135deg, #EFF6FF, #fff);
+      border: 2px solid #BFDBFE;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .notification {
+      background: white;
+      border-left: 4px solid #2563EB;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      animation: pulse 2s infinite;
+    }
+
+    .notification-time {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+
+    .notification-text {
+      font-size: 0.875rem;
+      color: #111;
+    }
+
+    .leads-badge {
+      background: #2563EB;
+      color: white;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .leads-number {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .leads-text {
+      font-size: 0.875rem;
+    }
+
+    /* Reviews */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .review-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+    }
+
+    .review-card:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* CTA Final */
+    .cta-final {
+      background: linear-gradient(135deg, #2563EB, #1E40AF);
+      color: white;
+      text-align: center;
+      padding: 5rem 0;
+    }
+
+    .cta-final h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-final p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .cta-final .cta-primary {
+      background: white;
+      color: #2563EB;
+    }
+
+    .cta-final .cta-primary:hover {
+      background: #f9fafb;
+    }
+
+    .cta-contact {
+      margin-top: 2rem;
+      opacity: 0.8;
+    }
+
+    /* Footer */
+    footer {
+      background: #111827;
+      color: #9ca3af;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    footer .logo-wrapper {
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    footer .brand-name {
+      color: white;
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-grid,
+      .benefits-grid,
+      .steps-grid,
+      .reviews-grid,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .header-contact {
+        display: none;
+      }
+
+      .mockup-chat {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo-wrapper">
+        <div class="logo">
+          <div class="logo-outer"></div>
+          <div class="logo-inner">P</div>
+          <div class="logo-border"></div>
+        </div>
+        <span class="brand-name">iPersonal</span>
+      </div>
+      <a href="https://wa.me/5562995609037" class="header-contact">
+        💬 (62) 99560-9037
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="badge">🔥 Mais de <span id="connections">1200</span> conexões realizadas</span>
+          
+          <h1>
+            Seu treino personalizado <span class="highlight">começa aqui.</span>
+          </h1>
+          
+          <p class="hero-subtitle">
+            A inteligência artificial que encontra o personal certo pra você — em menos de <strong>2 minutos</strong>, direto no WhatsApp.
+          </p>
+
+          <a href="https://wa.me/5562995609037?text=Ol%C3%A1%2C+quero+encontrar+meu+personal" class="cta-primary">
+            💬 Encontrar meu Personal Agora
+          </a>
+
+          <div class="hero-info">
+            <div class="hero-info-item">
+              ⏱️ Resposta em 30 segundos
+            </div>
+            <div class="hero-info-item">
+              ✅ 100% gratuito
+            </div>
+          </div>
+        </div>
+
+        <div class="mockup-wrapper">
+          <div class="mockup">
+            <div class="mockup-inner">
+              <div class="mockup-header">
+                <div class="logo">
+                  <div class="logo-outer"></div>
+                  <div class="logo-inner">P</div>
+                  <div class="logo-border"></div>
+                </div>
+                <div class="mockup-header-info">
+                  <h3>Assistente iPersonal</h3>
+                  <p>online</p>
+                </div>
+              </div>
+              <div class="mockup-chat">
+                <div class="chat-message received">
+                  Olá! Sou a assistente virtual da iPersonal 👋
+                </div>
+                <div class="chat-message received">
+                  Vou te ajudar a encontrar o personal trainer ideal em menos de 2 minutos!
+                </div>
+                <div class="chat-message sent">
+                  Quero começar!
+                </div>
+                <div class="chat-message received">
+                  Perfeito! Qual é o seu principal objetivo? 🎯
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como Funciona -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Simples. Rápido. E feito pra você.</h2>
+      <p class="section-subtitle">Nada de formulários chatos. Em 3 passos, você encontra o profissional ideal.</p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-icon">💬</div>
+          <h3 class="step-title">Fale com a assistente</h3>
+          <p class="step-desc">Inicie a conversa no WhatsApp e diga seu objetivo.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-icon">✅</div>
+          <h3 class="step-title">Responda 3 perguntas</h3>
+          <p class="step-desc">Treino, disponibilidade e preferência de modalidade.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-icon">⚡</div>
+          <h3 class="step-title">Receba indicações</h3>
+          <p class="step-desc">Sugestões de profissionais alinhados com seu perfil.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="https://wa.me/5562995609037?text=Quero+come%C3%A7ar" class="cta-primary">
+          💬 Começar Agora no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Para Alunos -->
+  <section style="background: linear-gradient(135deg, #f9fafb, #fff);">
+    <div class="container">
+      <div class="benefits-grid">
+        <div>
+          <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+            Treinar com o profissional certo <span style="color: #2563EB;">muda tudo.</span>
+          </h2>
+          
+          <p style="font-size: 1.25rem; color: #6b7280; margin-bottom: 1.5rem;">
+            Acompanhamento 100% personalizado sem perder tempo procurando.
+          </p>
+
+          <ul class="benefits-list">
+            <li class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <span style="font-size: 1.125rem;">Planos e horários que se adaptam à sua rotina</span>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <span style="font-size: 1.125rem;">Acompanhamento sob medida pro seu objetivo</span>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <span style="font-size: 1.125rem;">Resultados visíveis em poucas semanas</span>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <span style="font-size: 1.125rem;">Presencial ou online — você escolhe</span>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <span style="font-size: 1.125rem;">Sem burocracia, tudo pelo WhatsApp</span>
+            </li>
+          </ul>
+
+          <a href="https://wa.me/5562995609037?text=Quero+me+inscrever+como+aluno" class="cta-primary" style="margin-top: 1.5rem;">
+            💬 Quero Encontrar Meu Personal
+          </a>
+        </div>
+
+        <div>
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="testimonial-avatar">C</div>
+              <div>
+                <div style="font-weight: 700; color: #111;">Carla, 29 anos</div>
+                <div class="stars">★★★★★</div>
+              </div>
+            </div>
+            <p class="testimonial-text">
+              "Em 7 dias encontrei um personal que entende exatamente o que eu precisava. Já perdi 4kg e me sinto mais disposta!"
+            </p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value">450+</div>
+              <div class="stat-label">Profissionais</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">1.2k+</div>
+              <div class="stat-label">Alunos Ativos</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">4.9★</div>
+              <div class="stat-label">Satisfação</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Para Profissionais -->
+  <section>
+    <div class="container">
+      <div class="benefits-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="notifications-box">
+          <div class="notification">
+            <div class="notification-time">há 5 minutos</div>
+            <div class="notification-text">🔔 Novo aluno disponível: João quer treino funcional 3x/semana</div>
+          </div>
+          <div class="notification">
+            <div class="notification-time">há 12 minutos</div>
+            <div class="notification-text">🔔 Maria está procurando personal para emagrecimento</div>
+          </div>
+          <div class="notification">
+            <div class="notification-time">há 18 minutos</div>
+            <div class="notification-text">🔔 Carlos quer hipertrofia - disponibilidade manhã</div>
+          </div>
+          <div class="leads-badge">
+            <div class="leads-number">+47</div>
+            <div class="leads-text">novos leads esta semana</div>
+          </div>
+        </div>
+
+        <div>
+          <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+            Deixe a IA cuidar dos <span style="color: #2563EB;">agendamentos</span> pra você.
+          </h2>
+          
+          <p style="font-size: 1.25rem; color: #6b7280; margin-bottom: 1.5rem;">
+            Enquanto você foca nas aulas, a iPersonal traz alunos qualificados direto no seu WhatsApp.
+          </p>
+
+          <ul class="benefits-list">
+            <li class="benefit-item">
+              <div class="benefit-icon">👥</div>
+              <span style="font-size: 1.125rem;">Receba alunos qualificados automaticamente</span>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">⏱️</div>
+              <span style="font-size: 1.125rem;">Economize tempo com atendimento</span>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">📈</div>
+              <span style="font-size: 1.125rem;">Aumente sua base sem gastar com anúncios</span>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">💬</div>
+              <span style="font-size: 1.125rem;">Controle total sobre disponibilidade</span>
+            </li>
+          </ul>
+
+          <a href="https://wa.me/5562995609037?text=Quero+cadastrar+meu+perfil+como+profissional" class="cta-secondary" style="margin-top: 1.5rem;">
+            🚀 Cadastrar Meu Perfil Agora
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section style="background: linear-gradient(135deg, #f9fafb, #fff);">
+    <div class="container">
+      <h2 class="section-title">O que dizem nossos usuários</h2>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p style="margin: 1rem 0; font-style: italic; color: #374151;">
+            "Recebi 3 novos alunos em uma semana! O sistema funciona mesmo."
+          </p>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="testimonial-avatar" style="width: 3rem; height: 3rem; font-size: 1.25rem;">J</div>
+            <div>
+              <div style="font-weight: 700;">João Silva, 34</div>
+              <div style="font-size: 0.875rem; color: #6b7280;">Personal Trainer</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p style="margin: 1rem 0; font-style: italic; color: #374151;">
+            "Economizei 2 horas por dia que gastava respondendo mensagens."
+          </p>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="testimonial-avatar" style="width: 3rem; height: 3rem; font-size: 1.25rem;">M</div>
+            <div>
+              <div style="font-weight: 700;">Mariana Costa, 27</div>
+              <div style="font-size: 0.875rem; color: #6b7280;">Personal Trainer</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p style="margin: 1rem 0; font-style: italic; color: #374151;">
+            "A recomendação foi certeira — mantive o aluno por 3 meses seguidos."
+          </p>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="testimonial-avatar" style="width: 3rem; height: 3rem; font-size: 1.25rem;">T</div>
+            <div>
+              <div style="font-weight: 700;">Tiago Mendes, 41</div>
+              <div style="font-size: 0.875rem; color: #6b7280;">Personal Trainer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="cta-final">
+    <div class="container">
+      <h2>Pare de perder tempo procurando. Deixe a iPersonal encontrar pra você.</h2>
+      <p>Seja aluno ou personal, nossa IA conecta você com quem faz sentido — e faz isso em minutos.</p>
+      
+      <a href="https://wa.me/5562995609037?text=Quero+falar+com+a+assistente" class="cta-primary">
+        💬 Falar com a Assistente Agora
+      </a>
+
+      <div class="cta-contact">
+        <p style="font-size: 0.875rem;">Atendimento 24h via WhatsApp</p>
+        <p style="font-size: 1.125rem; font-weight: 600; margin-top: 0.5rem;">(62) 99560-9037</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="logo-wrapper">
+        <div class="logo">
+          <div class="logo-outer"></div>
+          <div class="logo-inner">P</div>
+          <div class="logo-border"></div>
+        </div>
+        <span class="brand-name">iPersonal</span>
+      </div>
+      <p style="font-size: 0.875rem; margin-top: 1rem;">© 2025 iPersonal – Todos os direitos reservados.</p>
+      <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem;">Desenvolvido por Plataforma MESTRE</p>
+    </div>
+  </footer>
+
+  <script>
+    // Contador de conexões animado
+    let connections = 1200;
+    setInterval(() => {
+      connections++;
+      document.getElementById('connections').textContent = connections.toLocaleString('pt-BR');
+    }, 5000);
+
+    // Scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
